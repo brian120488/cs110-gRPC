@@ -114,6 +114,12 @@ func Execute(client WhatsUpClient, ctx context.Context, arguments ...string) (st
             // This should print a comma-separated string of all users returned by
             // the RPC, ending with a newline character "\n", to the console.
             // The order of the users printed does not matter.
+						users, err := client.List(ctx, &Empty{})
+            if err != nil {
+                return "", err
+            }
+
+            return fmt.Sprintf("%s\n", strings.Join(users.Users, ",")), nil
 
         case "quit":
 
